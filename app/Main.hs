@@ -1,7 +1,7 @@
 module Main where
 
+import qualified Gode.Core as Gode
 import System.Environment (getArgs)
-import qualified Main as Gode
 
 main :: IO ()
 main = do

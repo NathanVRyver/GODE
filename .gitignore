@@ -1,0 +1,39 @@
+# Haskell build artifacts
+dist/
+dist-newstyle/
+.ghc.environment.*
+cabal.project.local
+cabal.project.local~
+
+
+# Stack build artifacts
+.stack-work/
+stack.yaml.lock
+
+# GHC build artifacts
+*.hi
+*.o
+*.p_hi
+*.prof
+*.tix
+*.eventlog
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.tix
+.hpc/
+
+# Cabal specific
+cabal.project.local
+cabal.project.local~ 

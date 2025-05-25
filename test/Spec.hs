@@ -1,5 +1,5 @@
+import qualified Gode.Core as Gode
 import Test.Hspec
-import qualified Main as Gode
 
 main :: IO ()
 main = hspec $ do
@@ -16,4 +16,4 @@ main = hspec $ do
           (result, logs) = Gode.eval Gode.program env
       result `shouldBe` "low"
       length logs `shouldBe` 3
-      head logs `shouldContain` "is False" 
+      head logs `shouldContain` "is False"
