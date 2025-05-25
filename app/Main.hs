@@ -9,11 +9,14 @@ main = do
   case args of
     [x, op, n, thenVal, elseVal] -> do
       let env = Gode.Env (read x) ("cli: " ++ x)
+          -- Combine operator into a single string to avoid shell interpretation
           program = Gode.If (unwords ["x", op, n]) thenVal elseVal
           (result, logs) = Gode.eval program env
       mapM_ putStrLn logs
       putStrLn $ "Result: " ++ result
     _ -> do
       putStrLn "Usage: gode <value> <operator> <threshold> <then-value> <else-value>"
-      putStrLn "Example: gode 5 > 3 high low"
-      putStrLn "Supported operators: >, <, =="
+      putStrLn "Example: gode 5 '>' 3 high low"
+      putStrLn "Example: gode 2 '<' 3 low high"
+      putStrLn "Example: gode 3 '==' 3 match no-match"
+      putStrLn "Supported operators: '>', '<', '=='"
