@@ -4,42 +4,42 @@ GODE is a lightweight debugger that helps you understand the causal relationship
 
 ## Project Status
 
-🚧 **Work in Progress** 🚧
+**Work in Progress**
 
-### Currently Implemented ✅
+### Currently Implemented
 
-- [x] Basic causal tracing for conditional expressions
-- [x] Support for comparison operators (`>`, `<`, `==`, `>=`, `<=`)
-- [x] Interactive debugging mode
-- [x] Colorized error messages
-- [x] Basic test suite
-- [x] Command-line interface
+- Basic causal tracing for conditional expressions
+- Support for comparison operators (`>`, `<`, `==`, `>=`, `<=`)
+- Interactive debugging mode
+- Colorized error messages
+- Basic test suite
+- Command-line interface
 
-### Coming Soon 🔜
+### Coming Soon
 
-- [ ] Multiple variable support
-  - [ ] Variable declaration and assignment
-  - [ ] Variable scope tracking
-  - [ ] Variable value history
-- [ ] Enhanced tracing
-  - [ ] JSON output format
-  - [ ] File-based trace logging
-  - [ ] Custom trace formatting
-  - [ ] Trace filtering and search
-- [ ] Advanced debugging features
-  - [ ] Breakpoints
-  - [ ] Step-by-step execution
-  - [ ] Watch expressions
-  - [ ] Call stack visualization
-- [ ] Integration capabilities
-  - [ ] IDE integration
-  - [ ] Log aggregation
-  - [ ] Performance metrics
-- [ ] Documentation
-  - [ ] API documentation
-  - [ ] Debugging guides
-  - [ ] Example scenarios
-  - [ ] Best practices
+- Multiple variable support
+  - Variable declaration and assignment
+  - Variable scope tracking
+  - Variable value history
+- Enhanced tracing
+  - JSON output format
+  - File-based trace logging
+  - Custom trace formatting
+  - Trace filtering and search
+- Advanced debugging features
+  - Breakpoints
+  - Step-by-step execution
+  - Watch expressions
+  - Call stack visualization
+- Integration capabilities
+  - IDE integration
+  - Log aggregation
+  - Performance metrics
+- Documentation
+  - API documentation
+  - Debugging guides
+  - Example scenarios
+  - Best practices
 
 ## Features
 
