@@ -1,7 +1,7 @@
 module Main where
 
 import qualified Gode.Core as Gode
-import System.Console.ANSI (Color (..), ConsoleLayer (..), SGR (..), setSGR)
+import System.Console.ANSI (Color (..), ColorIntensity (..), ConsoleLayer (..), SGR (..), setSGR)
 import System.Environment (getArgs)
 import System.IO (hFlush, stdout)
 import Text.Read (readMaybe)
@@ -58,8 +58,13 @@ main = do
   case args of
     ["repl"] -> do
       putStrLn "GODE Interactive Mode (type 'quit' to exit)"
-      putStrLn "Example: 5 '>' 3 high low"
-      putStrLn "Supported operators: '>', '<', '==', '>=', '<='"
+      putStrLn "\nEnter expressions in this format:"
+      putStrLn "  <number> <operator> <number> <then-value> <else-value>"
+      putStrLn "\nExamples:"
+      putStrLn "  2 < 6 high low"
+      putStrLn "  3 >= 3 match no-match"
+      putStrLn "  5 == 3 yes no"
+      putStrLn "\nSupported operators: >, <, ==, >=, <="
       repl
     _ -> case parseInput args of
       Right (x, op, y, thenVal, elseVal) -> do
