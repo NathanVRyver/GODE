@@ -6,6 +6,17 @@ data Env = Env {val :: Int, src :: String}
 -- Tiny AST: if (x > n) then "A" else "B"
 data Expr = If String String String
 
+-- Supported operators
+data Operator = GreaterThan | LessThan | Equals
+  deriving (Show, Eq)
+
+-- Parse operator from string
+parseOperator :: String -> Maybe Operator
+parseOperator ">" = Just GreaterThan
+parseOperator "<" = Just LessThan
+parseOperator "==" = Just Equals
+parseOperator _ = Nothing
+
 -- Evaluate and log decisions
 eval :: Expr -> Env -> (String, [String])
 eval (If cond thenVal elseVal) env =
@@ -18,14 +29,21 @@ eval (If cond thenVal elseVal) env =
         ]
    in (result, logs)
 
--- Check condition (only supports "x > n")
+-- Check condition with support for multiple operators
 checkCond :: String -> Env -> (Bool, String)
 checkCond cond env =
   case words cond of
-    ["x", ">", n] ->
-      let threshold = read n
-       in (val env > threshold, show (val env) ++ " > " ++ n)
-    _ -> error "Unsupported condition"
+    ["x", op, n] ->
+      case parseOperator op of
+        Just operator ->
+          let threshold = read n
+              (met, desc) = case operator of
+                GreaterThan -> (val env > threshold, ">")
+                LessThan -> (val env < threshold, "<")
+                Equals -> (val env == threshold, "==")
+           in (met, show (val env) ++ " " ++ desc ++ " " ++ n)
+        Nothing -> error $ "Unsupported operator: " ++ op
+    _ -> error "Unsupported condition format"
 
 -- Example program
 program :: Expr
