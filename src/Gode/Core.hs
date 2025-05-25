@@ -9,7 +9,12 @@ data Env = Env {val :: Int, src :: String}
 data Expr = If String String String
 
 -- Supported operators
-data Operator = GreaterThan | LessThan | Equals
+data Operator
+  = GreaterThan
+  | LessThan
+  | Equals
+  | GreaterThanOrEqual
+  | LessThanOrEqual
   deriving (Show, Eq)
 
 -- Error types
@@ -24,6 +29,8 @@ parseOperator :: String -> Either GodeError Operator
 parseOperator ">" = Right GreaterThan
 parseOperator "<" = Right LessThan
 parseOperator "==" = Right Equals
+parseOperator ">=" = Right GreaterThanOrEqual
+parseOperator "<=" = Right LessThanOrEqual
 parseOperator op = Left $ InvalidOperator op
 
 -- Parse number from string
@@ -57,6 +64,8 @@ checkCond cond env =
             GreaterThan -> (val env > threshold, ">")
             LessThan -> (val env < threshold, "<")
             Equals -> (val env == threshold, "==")
+            GreaterThanOrEqual -> (val env >= threshold, ">=")
+            LessThanOrEqual -> (val env <= threshold, "<=")
       Right (met, show (val env) ++ " " ++ desc ++ " " ++ n)
     _ -> Left InvalidFormat
 
