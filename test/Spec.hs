@@ -23,10 +23,31 @@ main = hspec $ do
             head logs `shouldContain` "is False"
           Left err -> error $ "Unexpected error: " ++ show err
 
-    describe "Less than operator" $ do
-      it "evaluates x < 3 correctly for value below threshold" $ do
+    describe "Greater than or equal operator" $ do
+      it "evaluates x >= 3 correctly for equal value" $ do
+        let env = Gode.Env 3 "test"
+            program = Gode.If "x >= 3" "high" "low"
+        case Gode.eval program env of
+          Right (result, logs) -> do
+            result `shouldBe` "high"
+            length logs `shouldBe` 3
+            head logs `shouldContain` "is True"
+          Left err -> error $ "Unexpected error: " ++ show err
+
+      it "evaluates x >= 3 correctly for value below threshold" $ do
         let env = Gode.Env 2 "test"
-            program = Gode.If "x < 3" "low" "high"
+            program = Gode.If "x >= 3" "high" "low"
+        case Gode.eval program env of
+          Right (result, logs) -> do
+            result `shouldBe` "low"
+            length logs `shouldBe` 3
+            head logs `shouldContain` "is False"
+          Left err -> error $ "Unexpected error: " ++ show err
+
+    describe "Less than or equal operator" $ do
+      it "evaluates x <= 3 correctly for equal value" $ do
+        let env = Gode.Env 3 "test"
+            program = Gode.If "x <= 3" "low" "high"
         case Gode.eval program env of
           Right (result, logs) -> do
             result `shouldBe` "low"
@@ -34,33 +55,12 @@ main = hspec $ do
             head logs `shouldContain` "is True"
           Left err -> error $ "Unexpected error: " ++ show err
 
-      it "evaluates x < 3 correctly for value above threshold" $ do
+      it "evaluates x <= 3 correctly for value above threshold" $ do
         let env = Gode.Env 4 "test"
-            program = Gode.If "x < 3" "low" "high"
+            program = Gode.If "x <= 3" "low" "high"
         case Gode.eval program env of
           Right (result, logs) -> do
             result `shouldBe` "high"
-            length logs `shouldBe` 3
-            head logs `shouldContain` "is False"
-          Left err -> error $ "Unexpected error: " ++ show err
-
-    describe "Equals operator" $ do
-      it "evaluates x == 3 correctly for matching value" $ do
-        let env = Gode.Env 3 "test"
-            program = Gode.If "x == 3" "match" "no-match"
-        case Gode.eval program env of
-          Right (result, logs) -> do
-            result `shouldBe` "match"
-            length logs `shouldBe` 3
-            head logs `shouldContain` "is True"
-          Left err -> error $ "Unexpected error: " ++ show err
-
-      it "evaluates x == 3 correctly for non-matching value" $ do
-        let env = Gode.Env 4 "test"
-            program = Gode.If "x == 3" "match" "no-match"
-        case Gode.eval program env of
-          Right (result, logs) -> do
-            result `shouldBe` "no-match"
             length logs `shouldBe` 3
             head logs `shouldContain` "is False"
           Left err -> error $ "Unexpected error: " ++ show err
